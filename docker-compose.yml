@@ -1,0 +1,17 @@
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_DB: poupscan
+      POSTGRES_USER: poupscan
+      POSTGRES_PASSWORD: poupscan_local_only
+    ports: ["5432:5432"]
+  api:
+    build: ./backend
+    environment:
+      WORLDPOP_API_BASE_URL: https://api.worldpop.org/v3
+    ports: ["8000:8000"]
+  web:
+    build: ./frontend
+    ports: ["5173:80"]
+    depends_on: [api]

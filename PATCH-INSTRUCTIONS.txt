@@ -1,0 +1,9 @@
+POUPSCAN - CUSTOM POLYGON ONLY UPDATE
+
+This is a replacement-files patch, not a full project archive.
+Extract this ZIP directly into your existing D:\Downloads\poupscan folder and choose Replace the files in the destination when Windows asks.
+
+Removed: place/city search UI and its backend API endpoints.
+Preserved: interactive map, custom polygon draw/edit/delete, WorldPop custom-area population analysis, CSV export and PDF report.
+
+After extraction, restart the backend and frontend.
