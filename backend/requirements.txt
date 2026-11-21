@@ -1,7 +1,5 @@
-# Poupscan backend dependencies.
-# Python 3.15 Windows: the geospatial wheel index supplies compiled PROJ wheels.
---extra-index-url https://gisidx.github.io/gwi
---only-binary=pyproj,shapely
+
+# Poupscan backend dependencies
 
 fastapi>=0.121,<1.0
 uvicorn>=0.38,<1.0
