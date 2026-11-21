@@ -8,7 +8,7 @@ import {
 import { EditControl } from 'react-leaflet-draw';
 import 'leaflet-draw';
 
-const API = 'http://localhost:8000';
+const API = '';
 
 export default function App() {
   const [geo, setGeo] = useState<any>(null);
