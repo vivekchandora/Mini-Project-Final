@@ -7,7 +7,7 @@ import httpx
 BASE = os.getenv("NOMINATIM_BASE_URL", "https://nominatim.openstreetmap.org").rstrip("/")
 USER_AGENT = os.getenv(
     "GEOCODING_USER_AGENT",
-    "Poupscan/1.2 (India population research application; configure a contact email)",
+    "PopScan/1.2 (India population research application; configure a contact email)",
 )
 CONTACT_EMAIL = os.getenv("GEOCODING_CONTACT_EMAIL", "").strip()
 _lock = asyncio.Lock()

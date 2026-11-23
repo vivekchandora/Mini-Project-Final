@@ -1,9 +1,20 @@
-POUPSCAN - CUSTOM POLYGON ONLY UPDATE
+POPSCAN FRONTEND API CONNECTION FIX
 
-This is a replacement-files patch, not a full project archive.
-Extract this ZIP directly into your existing D:\Downloads\poupscan folder and choose Replace the files in the destination when Windows asks.
+This patch fixes the deployed frontend calling http://localhost:8000.
+It changes the API base to an empty string so API requests and report
+links use the same origin as the deployed website. Vercel's existing
+/api/* rewrite can then route those requests to the backend.
 
-Removed: place/city search UI and its backend API endpoints.
-Preserved: interactive map, custom polygon draw/edit/delete, WorldPop custom-area population analysis, CSV export and PDF report.
+Apply:
+1. Extract this ZIP into the root of your PopScan project folder.
+2. Allow Windows to replace frontend/src/App.tsx.
+3. Commit and push the change to GitHub:
 
-After extraction, restart the backend and frontend.
+   git add frontend/src/App.tsx
+   git commit -m "Fix frontend API base URL for Vercel"
+   git push
+
+4. Wait for Vercel to finish deploying the new commit.
+5. Open the production website and hard-refresh with Ctrl+F5.
+
+No backend code or Vercel configuration is changed by this patch.

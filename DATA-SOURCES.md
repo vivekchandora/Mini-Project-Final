@@ -1,4 +1,4 @@
-# Poupscan — population data research notes
+# PopScan — population data research notes
 
 Research snapshot: 22 November 2026.
 
@@ -13,7 +13,7 @@ Research snapshot: 22 November 2026.
 
 ## Why not hard-code city totals?
 
-A city label does not identify a unique statistical geography. For example, Mumbai can refer to the municipal corporation, a city/town unit, a wider urban agglomeration or a metropolitan region. A fixed population value attached to the string "Mumbai" can therefore be wrong even if that value is accurate for a different boundary. Poupscan instead calculates from the polygon selected and labels that polygon.
+A city label does not identify a unique statistical geography. For example, Mumbai can refer to the municipal corporation, a city/town unit, a wider urban agglomeration or a metropolitan region. A fixed population value attached to the string "Mumbai" can therefore be wrong even if that value is accurate for a different boundary. PopScan instead calculates from the polygon selected and labels that polygon.
 
 ## WorldPop
 

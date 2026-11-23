@@ -9,7 +9,7 @@ from pydantic import BaseModel, Field
 from app.services.geospatial import validate_polygon, area_sq_km
 from app.services.worldpop import estimate, WorldPopUnavailable, DOCS_URL, DATASET
 
-app = FastAPI(title="Poupscan API", version="1.1.0")
+app = FastAPI(title="PopScan API", version="1.1.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -92,14 +92,14 @@ def report(location, pop, area, year, kind):
         return Response(
             stream.getvalue(),
             media_type="text/csv",
-            headers={"Content-Disposition": "attachment; filename=poupscan.csv"},
+            headers={"Content-Disposition": "attachment; filename=popscan.csv"},
         )
     buffer = io.BytesIO()
     from reportlab.pdfgen import canvas
     pdf = canvas.Canvas(buffer)
     y = 790
     for line in [
-        "Poupscan Population Report",
+        "PopScan Population Report",
         f"Location: {location}",
         f"Estimated population: {pop}",
         f"Area (km2): {area}",
@@ -115,7 +115,7 @@ def report(location, pop, area, year, kind):
     return Response(
         buffer.getvalue(),
         media_type="application/pdf",
-        headers={"Content-Disposition": "attachment; filename=poupscan.pdf"},
+        headers={"Content-Disposition": "attachment; filename=popscan.pdf"},
     )
 
 

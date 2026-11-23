@@ -1,6 +1,6 @@
 # Python 3.15 dependency note
 
-Poupscan uses Shapely for geometry validation and pyproj for accurate area measurement.
+PopScan uses Shapely for geometry validation and pyproj for accurate area measurement.
 On Windows, pyproj requires compiled PROJ binaries. The requirements file includes the
 Geospatial Wheels Index as an additional package source and forces binary wheels for
 pyproj and Shapely so pip does not attempt a local PROJ/source build.

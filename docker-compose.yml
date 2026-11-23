@@ -2,9 +2,9 @@ services:
   db:
     image: postgis/postgis:16-3.4
     environment:
-      POSTGRES_DB: poupscan
-      POSTGRES_USER: poupscan
-      POSTGRES_PASSWORD: poupscan_local_only
+      POSTGRES_DB: popscan
+      POSTGRES_USER: popscan
+      POSTGRES_PASSWORD: popscan_local_only
     ports: ["5432:5432"]
   api:
     build: ./backend

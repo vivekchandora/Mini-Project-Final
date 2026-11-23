@@ -1,10 +1,10 @@
-# Poupscan
+# PopScan
 
 India-focused geospatial population explorer.
 
 ## Population-data design (reviewed 22 November 2026)
 
-Poupscan deliberately separates **place/boundary discovery** from **population estimation**:
+PopScan deliberately separates **place/boundary discovery** from **population estimation**:
 
 1. **Place discovery and boundary:** OpenStreetMap Nominatim. Search results with polygon geometry are ranked ahead of point-only place markers. The selected OSM object is looked up again and validated before analysis.
 2. **Current approximate city/area population:** WorldPop Global2 R2025A v1, queried through the official WorldPop API. The API sums the modelled population grid cells falling inside the supplied GeoJSON polygon.
@@ -20,7 +20,7 @@ Poupscan deliberately separates **place/boundary discovery** from **population e
 
 ### City-wise behaviour
 
-Searching Mumbai, Pune, Bengaluru, Delhi or another Indian settlement returns a WorldPop estimate for the exact polygon boundary Poupscan successfully resolves. The output names the boundary so users can see whether the result represents a municipal area, town, urban agglomeration, district or another mapped feature.
+Searching Mumbai, Pune, Bengaluru, Delhi or another Indian settlement returns a WorldPop estimate for the exact polygon boundary PopScan successfully resolves. The output names the boundary so users can see whether the result represents a municipal area, town, urban agglomeration, district or another mapped feature.
 
 A small starter file `backend/data/census_2011_city_reference.csv` includes selected large 2011 Census urban units (including Greater Mumbai U.A. and Pune U.A.). These appear as a separate historical reference, never as the current population. **This starter file is not a complete all-India Census database.** Use the importer below with the official Census A-04 Class I–VI workbooks to extend it.
 
@@ -55,9 +55,9 @@ The shared client throttles requests to at least approximately one request per s
 
 - A correct population total depends on selecting the correct geography. Mumbai city, Greater Mumbai municipal limits and Greater Mumbai urban agglomeration are different geographic units.
 - WorldPop's grid is a modelled estimate, not a precise household count. The 100 m label is approximate at the equator; actual ground dimensions vary with latitude.
-- Poupscan does not currently merge WorldPop and Census values into one number. They are presented as different datasets and years.
+- PopScan does not currently merge WorldPop and Census values into one number. They are presented as different datasets and years.
 - GHSL is documented as a future cross-check but is not downloaded or queried by this build.
-- If no valid polygon or validated WorldPop response is available, Poupscan returns an error instead of inventing a population.
+- If no valid polygon or validated WorldPop response is available, PopScan returns an error instead of inventing a population.
 
 ## Run locally
 

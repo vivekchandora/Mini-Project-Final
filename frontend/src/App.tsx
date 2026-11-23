@@ -44,7 +44,7 @@ export default function App() {
   return (
     <div className="page">
       <header>
-        <div className="logo">P<span>OUPSCAN</span></div>
+        <div className="logo">POP<span>SCAN</span></div>
         <small>INDIA · POPULATION INTELLIGENCE</small>
       </header>
 
@@ -125,11 +125,11 @@ export default function App() {
           )}
           <div className="integrity">
             <b>Data integrity first</b>
-            <p>Population estimates come from a validated gridded dataset. They are not live headcounts or official Census counts. If a boundary or source response cannot be validated, Poupscan explains why it cannot return a figure.</p>
+            <p>Population estimates come from a validated gridded dataset. They are not live headcounts or official Census counts. If a boundary or source response cannot be validated, PopScan explains why it cannot return a figure.</p>
           </div>
         </aside>
       </div>
-      <footer>POUPSCAN MVP 1.0 <span>Estimates are not official census counts.</span></footer>
+      <footer>POPSCAN MVP 1.0 <span>Estimates are not official census counts.</span></footer>
     </div>
   );
 }
