@@ -10,6 +10,56 @@ import 'leaflet-draw';
 
 const API = '';
 
+/**
+ * Leaflet normally exports GeoJSON as [longitude, latitude].
+ * This guard repairs the common reversed [latitude, longitude] order
+ * when the complete polygon clearly falls within India's coordinate range.
+ * Already-correct GeoJSON is returned unchanged.
+ */
+function normalizeIndiaGeoJSON(geometry: any) {
+  if (!geometry || !['Polygon', 'MultiPolygon'].includes(geometry.type)) {
+    return geometry;
+  }
+
+  const positions: number[][] = [];
+  const collectPositions = (node: any): void => {
+    if (!Array.isArray(node)) return;
+    if (node.length >= 2 && typeof node[0] === 'number' && typeof node[1] === 'number') {
+      positions.push(node);
+      return;
+    }
+    node.forEach(collectPositions);
+  };
+
+  collectPositions(geometry.coordinates);
+  if (!positions.length) return geometry;
+
+  const firstValues = positions.map((position) => position[0]);
+  const secondValues = positions.map((position) => position[1]);
+  const firstMin = Math.min(...firstValues);
+  const firstMax = Math.max(...firstValues);
+  const secondMin = Math.min(...secondValues);
+  const secondMax = Math.max(...secondValues);
+
+  // Reversed India coordinates look like [latitude 6–38, longitude 68–98].
+  const appearsReversedForIndia =
+    firstMin >= 5 && firstMax <= 38 &&
+    secondMin >= 60 && secondMax <= 100;
+
+  if (!appearsReversedForIndia) return geometry;
+
+  const swapPositions = (node: any): any => {
+    if (!Array.isArray(node)) return node;
+    if (node.length >= 2 && typeof node[0] === 'number' && typeof node[1] === 'number') {
+      return [node[1], node[0], ...node.slice(2)];
+    }
+    return node.map(swapPositions);
+  };
+
+  return { ...geometry, coordinates: swapPositions(geometry.coordinates) };
+}
+
+
 export default function App() {
   const [geo, setGeo] = useState<any>(null);
   const [res, setRes] = useState<any>(null);
@@ -68,12 +118,12 @@ export default function App() {
                 <EditControl
                   position="topright"
                   onCreated={(event: any) => {
-                    setGeo(event.layer.toGeoJSON().geometry);
+                    setGeo(normalizeIndiaGeoJSON(event.layer.toGeoJSON().geometry));
                     setRes(null);
                     setErr('');
                   }}
                   onEdited={(event: any) =>
-                    event.layers.eachLayer((layer: any) => setGeo(layer.toGeoJSON().geometry))
+                    event.layers.eachLayer((layer: any) => setGeo(normalizeIndiaGeoJSON(layer.toGeoJSON().geometry)))
                   }
                   onDeleted={() => {
                     setGeo(null);
